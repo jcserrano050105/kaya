@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Bookings — KAYA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles-dashboard.css">
+  <script src="../js/shared/contract.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.0/dist/umd/supabase.min.js"></script>
+  <script src="../js/shared/supabase-config.js"></script>
+  <script src="../js/shared/auth.js"></script>
+  <script>KAYA.Auth.guard("customer");</script>
+</head>
+<body data-page="bookings">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="KAYA home"><span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M8 20v-6.5M8 16.5l5-3.5M8 16.5l5 3.5"/><circle cx="17.5" cy="17.5" r="1.6" fill="#ff9f1c" stroke="none"/></svg></span>KAY<span>A</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
+      <nav class="nav" id="main-nav" aria-label="Main"></nav>
+    </div>
+  </header>
+
+
+  <main class="page">
+    <div class="container">
+      <section class="page-head">
+        <span class="system-tag system-tag--customer">Customer Dashboard</span>
+        <h1>My Bookings</h1>
+        <p id="customer-line"></p>
+      </section>
+
+      <div class="layout-2">
+        <section>
+          <p id="list-message" class="notice" hidden></p>
+          <div id="booking-list"></div>
+        </section>
+
+        <aside class="card">
+          <h2>Quick links</h2>
+          <div class="quick-actions" style="grid-template-columns:minmax(0,1fr);margin:0">
+            <a class="quick-action" href="book.html"><svg><use href="#i-search"/></svg>Book a Service</a>
+            <a class="quick-action" href="customer.html#track"><svg><use href="#i-route"/></svg>Track Service</a>
+            <a class="quick-action" href="customer.html#payments"><svg><use href="#i-wallet"/></svg>Payments</a>
+            <a class="quick-action" href="customer.html#warranty"><svg><use href="#i-shield"/></svg>Warranty Requests</a>
+            <a class="quick-action" href="customer.html#profile"><svg><use href="#i-users"/></svg>Trusted contact</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+        <span>© 2026 KAYA · Reliable Help. One Booking Away. · <a href="index.html#safety">Safety and Privacy</a> · <a href="#">Terms and Conditions</a> · support@kaya.ph</span>
+        <span>Systems Integration and Architecture 2 prototype · Data is simulated in your browser.</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="../js/shared/icons.js"></script>
+  <script src="../js/shared/ui.js"></script>
+  <script src="../js/shared/scenes.js"></script>
+  <script src="../js/shared/app-bg.js"></script>
+  <script src="../js/worker-management/seed.js"></script>
+  <script src="../js/worker-management/wm-api.js"></script>
+  <script src="../js/customer-booking/cb-store.js"></script>
+  <script src="../js/customer-booking/integration-client.js"></script>
+  <script src="../js/pages/bookings.js"></script>
+</body>
+</html>

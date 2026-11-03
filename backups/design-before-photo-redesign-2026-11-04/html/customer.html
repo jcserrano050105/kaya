@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard — KAYA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/shared/contract.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.0/dist/umd/supabase.min.js"></script>
+  <script src="../js/shared/supabase-config.js"></script>
+  <script src="../js/shared/auth.js"></script>
+  <script>KAYA.Auth.guard("customer");</script>
+</head>
+<body data-page="customer">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="KAYA home"><span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M8 20v-6.5M8 16.5l5-3.5M8 16.5l5 3.5"/><circle cx="17.5" cy="17.5" r="1.6" fill="#ff9f1c" stroke="none"/></svg></span>KAY<span>A</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
+      <nav class="nav" id="main-nav" aria-label="Main"></nav>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <div class="container" id="view-root" aria-live="polite"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+        <span>© 2026 KAYA · <a href="index.html#safety">Safety and Privacy</a> · <a href="#">Terms and Conditions</a> · Need help? support@kaya.ph</span>
+        <span>Systems Integration and Architecture 2 prototype · Data is simulated in your browser.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/shared/icons.js"></script>
+  <script src="../js/shared/ui.js"></script>
+  <script src="../js/shared/catalog.js"></script>
+  <script src="../js/worker-management/seed.js"></script>
+  <script src="../js/worker-management/wm-api.js"></script>
+  <script src="../js/customer-booking/cb-store.js"></script>
+  <script src="../js/customer-booking/integration-client.js"></script>
+  <script src="../js/pages/customer-portal.js"></script>
+</body>
+</html>

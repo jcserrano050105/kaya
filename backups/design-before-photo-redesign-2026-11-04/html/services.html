@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — KAYA</title>
+  <meta name="description" content="Plumbing, electrical work, cleaning, laundry, carpentry and gardening by verified KAYA workers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/shared/contract.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.0/dist/umd/supabase.min.js"></script>
+  <script src="../js/shared/supabase-config.js"></script>
+  <script src="../js/shared/auth.js"></script>
+  <script>KAYA.Auth.guard(null);</script>
+</head>
+<body data-page="services">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="KAYA home"><span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M8 20v-6.5M8 16.5l5-3.5M8 16.5l5 3.5"/><circle cx="17.5" cy="17.5" r="1.6" fill="#ff9f1c" stroke="none"/></svg></span>KAY<span>A</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
+      <nav class="nav" id="main-nav" aria-label="Main"></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="banner">
+      <div class="hero__bg" id="banner-bg" aria-hidden="true"></div>
+      <div class="hero__overlay"></div>
+      <div class="container">
+        <div class="banner__inner">
+          <div class="eyebrow">Services</div>
+          <h1>Skilled help for every corner of your home</h1>
+          <p>Six service categories, all delivered by workers whose identity and skills KAYA has verified. Prices below are starting rates — your worker sends an itemized estimate before any work begins.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="filter-bar" role="group" aria-label="Filter services">
+          <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All services</button>
+          <button class="filter-btn" type="button" data-filter="repair" aria-pressed="false">Repairs</button>
+          <button class="filter-btn" type="button" data-filter="care" aria-pressed="false">Home care</button>
+          <button class="filter-btn" type="button" data-filter="outdoor" aria-pressed="false">Outdoor</button>
+        </div>
+        <div class="svc-grid" id="svc-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section--tint">
+      <div class="container">
+        <div class="lock-banner reveal">
+          <div class="lock-banner__icon"><svg><use href="#i-lock"/></svg></div>
+          <div>
+            <h2 style="margin:0 0 4px;font-size:1.3rem">Booking needs a free customer account</h2>
+            <p>An account keeps your address, booking details and payments private, and lets verified workers know who they’re visiting.</p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--accent" href="book.html">Book a Service</a>
+            <a class="btn btn--glass" href="register.html">Create Account</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+        <span>© 2026 KAYA · Reliable Help. One Booking Away. · <a href="index.html#safety">Safety and Privacy</a> · <a href="#">Terms and Conditions</a> · <a href="worker-register.html">Become a Worker</a> · support@kaya.ph</span>
+        <span>Systems Integration and Architecture 2 prototype · Data is simulated in your browser.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/shared/icons.js"></script>
+  <script src="../js/shared/ui.js"></script>
+  <script src="../js/shared/catalog.js"></script>
+  <script src="../js/shared/scenes.js"></script>
+  <script>
+    (function () {
+      var ui = KAYA.ui;
+      var CATS = { plumbing: "repair", electrical: "repair", carpentry: "repair", cleaning: "care", laundry: "care", gardening: "outdoor" };
+      var COLORS = { plumbing: "#2554e8", electrical: "#f59e0b", cleaning: "#10b981", laundry: "#6366f1", carpentry: "#b45309", gardening: "#22c55e" };
+
+      KAYA.Scenes.carousel(ui.$("#banner-bg"), ["cleaning", "electrical", "carpentry", "gardening", "plumbing", "laundry"], { interval: 5000 });
+
+      ui.$("#svc-grid").innerHTML = KAYA.Catalog.all().map(function (s) {
+        return '<article class="svc reveal' + (s.active ? "" : " svc--off") + '" id="' + s.id + '" data-cat="' + CATS[s.id] + '">' +
+          '<div class="svc__media">' + KAYA.Scenes.svg(s.id) +
+          '<span class="svc__icon" style="background:' + COLORS[s.id] + '"><svg><use href="#i-' + s.id + '"/></svg></span></div>' +
+          '<div class="svc__body"><h3>' + ui.esc(s.name) + '</h3><div class="svc__tag">' + ui.esc(s.tagline) + "</div>" +
+          "<p>" + ui.esc(s.description) + '</p><ul class="svc__list">' + s.includes.map(function (i) { return "<li>" + ui.esc(i) + "</li>"; }).join("") + "</ul>" +
+          '<div class="svc__foot"><div class="price"><small>Starts at</small><strong>' + ui.peso(s.price).replace(".00", "") + "</strong></div>" +
+          (s.active ? '<a class="btn btn--primary" href="book.html?service=' + s.id + '">Book this service</a>'
+                    : '<span class="chip chip--warn">Temporarily unavailable</span>') +
+          "</div></div></article>";
+      }).join("");
+
+      var buttons = document.querySelectorAll("[data-filter]");
+      Array.prototype.forEach.call(buttons, function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-filter");
+          Array.prototype.forEach.call(buttons, function (b) {
+            b.classList.toggle("is-active", b === btn);
+            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+          });
+          Array.prototype.forEach.call(document.querySelectorAll(".svc"), function (c) {
+            c.classList.toggle("is-hidden", cat !== "all" && c.getAttribute("data-cat") !== cat);
+          });
+        });
+      });
+      ui.reveal();
+    })();
+  </script>
+</body>
+</html>

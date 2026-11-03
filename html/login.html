@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — KAYA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/shared/contract.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.0/dist/umd/supabase.min.js"></script>
+  <script src="../js/shared/supabase-config.js"></script>
+  <script src="../js/shared/auth.js"></script>
+  <script>KAYA.Auth.guard(null);</script>
+</head>
+<body class="auth-body page-public" data-page="login">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="KAYA home"><span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M8 20v-6.5M8 16.5l5-3.5M8 16.5l5 3.5"/><circle cx="17.5" cy="17.5" r="1.6" fill="#ff9f1c" stroke="none"/></svg></span>KAY<span>A</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
+      <nav class="nav" id="main-nav" aria-label="Main"></nav>
+    </div>
+  </header>
+
+  <main class="auth" id="main">
+    <div class="auth__bg" id="auth-bg" aria-hidden="true"></div>
+    <div class="auth__overlay"></div>
+
+    <section class="auth__intro">
+      <div class="eyebrow">Welcome back</div>
+      <h1>Reliable help is one booking away.</h1>
+      <p>Log in to book verified workers, approve estimates, track your service live and keep your payment records in one place.</p>
+      <ul class="auth__perks">
+        <li><svg><use href="#i-shield"/></svg>Identity-verified workers only</li>
+        <li><svg><use href="#i-lock"/></svg>Your address and bookings stay private</li>
+        <li><svg><use href="#i-route"/></svg>Live tracking from request to completion</li>
+      </ul>
+    </section>
+
+    <section class="auth__panel">
+      <div class="auth-card">
+        <!-- Log in -->
+        <div id="login-view">
+          <h2>Log In</h2>
+          <p class="sub">For customers and workers.</p>
+          <p id="login-reason" class="notice" hidden></p>
+          <form id="login-form" novalidate>
+            <div class="field">
+              <label for="li-email">Email address</label>
+              <input id="li-email" data-field="email" type="email" autocomplete="username" required>
+            </div>
+            <div class="field">
+              <label for="li-password">Password</label>
+              <div class="pw-wrap"><input id="li-password" data-field="password" type="password" autocomplete="current-password" required></div>
+            </div>
+            <div class="auth-row">
+              <label class="checkbox"><input id="li-remember" type="checkbox"> Keep me logged in</label>
+              <button class="linkish" type="button" id="show-forgot">Forgot password?</button>
+            </div>
+            <button class="btn btn--primary btn--block btn--lg" type="submit">Log In</button>
+            <p id="login-message" class="notice" hidden></p>
+          </form>
+
+          <div class="auth-divider">New to KAYA?</div>
+          <div class="auth-alt">
+            <a class="btn btn--accent btn--block" id="to-register" href="register.html">Create Customer Account</a>
+            <a class="btn btn--ghost btn--block" href="worker-register.html">Register as a Worker</a>
+            <a class="btn btn--ghost btn--block" href="admin-login.html"><svg aria-hidden="true"><use href="#i-lock"/></svg> Admin Login</a>
+          </div>
+        </div>
+
+        <!-- Forgot password -->
+        <div id="forgot-view" hidden>
+          <h2>Reset your password</h2>
+          <p class="sub">Enter the email you registered with. If it matches an account, we’ll send a reset link.</p>
+          <form id="forgot-form" novalidate>
+            <div class="field">
+              <label for="fp-email">Email address</label>
+              <input id="fp-email" data-field="email" type="email" autocomplete="email" required>
+            </div>
+            <button class="btn btn--primary btn--block" type="submit">Send reset link</button>
+            <p id="forgot-message" class="notice" hidden></p>
+          </form>
+          <p class="mt"><button class="linkish" type="button" id="back-login">← Back to Log In</button></p>
+        </div>
+
+        <p class="auth-foot"><a href="index.html#safety">Privacy</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/shared/icons.js"></script>
+  <script src="../js/shared/ui.js"></script>
+  <script src="../js/shared/scenes.js"></script>
+  <script src="../js/pages/auth-pages.js"></script>
+</body>
+</html>

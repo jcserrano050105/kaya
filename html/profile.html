@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker Trust Profile — KAYA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles-dashboard.css">
+  <script src="../js/shared/contract.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.0/dist/umd/supabase.min.js"></script>
+  <script src="../js/shared/supabase-config.js"></script>
+  <script src="../js/shared/auth.js"></script>
+  <script>KAYA.Auth.guard("customer");</script>
+</head>
+<body data-page="search">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="KAYA home"><span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M8 20v-6.5M8 16.5l5-3.5M8 16.5l5 3.5"/><circle cx="17.5" cy="17.5" r="1.6" fill="#ff9f1c" stroke="none"/></svg></span>KAY<span>A</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
+      <nav class="nav" id="main-nav" aria-label="Main"></nav>
+    </div>
+  </header>
+
+
+  <main class="page">
+    <div class="container">
+      <p><a href="search.html">&larr; Back to search</a></p>
+      <span class="system-tag system-tag--customer">Customer Dashboard</span>
+      <p id="profile-message" class="notice" hidden></p>
+
+      <div id="profile-layout" class="layout-2" hidden>
+        <section>
+          <article class="card">
+            <div class="person">
+              <div id="p-avatar" class="avatar avatar--lg"></div>
+              <div>
+                <h1 id="p-name"></h1>
+                <div id="p-meta" class="muted"></div>
+              </div>
+            </div>
+            <p id="p-bio" class="mt"></p>
+
+            <div class="stat-row">
+              <div class="stat"><div id="p-rating" class="stat__value"></div><div class="stat__label">Customer rating</div></div>
+              <div class="stat"><div id="p-jobs" class="stat__value"></div><div class="stat__label">Completed jobs on KAYA</div></div>
+              <div class="stat"><div id="p-years" class="stat__value"></div><div class="stat__label">Years of experience</div></div>
+            </div>
+
+            <h2>Verification</h2>
+            <ul id="p-checks" class="checklist"></ul>
+
+            <h2>Verified skills</h2>
+            <div id="p-skills" class="chips"></div>
+
+            <h2 class="mt">Certificates</h2>
+            <div id="p-certs" class="chips"></div>
+            <p class="small muted">KAYA shows the evidence so you can decide. It does not label anyone as "safe".</p>
+          </article>
+
+          <article class="card">
+            <h2>Recent reviews</h2>
+            <div id="p-reviews"></div>
+          </article>
+
+          <article class="card">
+            <details>
+              <summary><strong>Report a concern about this worker</strong></summary>
+              <form id="report-form" class="mt">
+                <div class="field">
+                  <label for="report-reason">Reason</label>
+                  <select id="report-reason" required>
+                    <option value="">Choose a reason</option>
+                    <option value="FAKE_PROFILE">Profile looks fake</option>
+                    <option value="UNPROFESSIONAL">Unprofessional behavior</option>
+                    <option value="SAFETY">Safety concern</option>
+                    <option value="OTHER">Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="report-description">What happened?</label>
+                  <textarea id="report-description" required></textarea>
+                </div>
+                <button class="btn btn--ghost" type="submit">Send report to KAYA</button>
+                <p id="report-message" class="notice" hidden></p>
+              </form>
+            </details>
+          </article>
+        </section>
+
+        <aside class="card">
+          <h2>Book this worker</h2>
+          <form id="booking-form" novalidate>
+            <div class="field">
+              <label for="b-service">Service</label>
+              <select id="b-service" required></select>
+            </div>
+            <div class="field">
+              <label for="b-schedule">Date and time (Philippine time)</label>
+              <input id="b-schedule" type="datetime-local" required>
+            </div>
+            <div class="field">
+              <label for="b-address">Address</label>
+              <input id="b-address" type="text" placeholder="House no., street, barangay" required>
+            </div>
+            <div class="field">
+              <label for="b-city">City</label>
+              <select id="b-city" required></select>
+            </div>
+            <div class="field">
+              <label for="b-problem">Describe the problem</label>
+              <textarea id="b-problem" placeholder="e.g. The kitchen sink leaks under the cabinet."></textarea>
+            </div>
+            <button id="b-submit" class="btn btn--primary btn--block" type="submit">Request booking</button>
+            <p class="small muted mt">Your address is shared only with the worker you book.</p>
+            <p id="booking-message" class="notice" hidden></p>
+          </form>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+        <span>© 2026 KAYA · Reliable Help. One Booking Away. · <a href="index.html#safety">Safety and Privacy</a> · <a href="#">Terms and Conditions</a> · support@kaya.ph</span>
+        <span>Systems Integration and Architecture 2 prototype · Data is simulated in your browser.</span>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="../js/shared/icons.js"></script>
+  <script src="../js/shared/ui.js"></script>
+  <script src="../js/shared/scenes.js"></script>
+  <script src="../js/shared/app-bg.js"></script>
+  <script src="../js/worker-management/seed.js"></script>
+  <script src="../js/worker-management/wm-api.js"></script>
+  <script src="../js/customer-booking/cb-store.js"></script>
+  <script src="../js/customer-booking/integration-client.js"></script>
+  <script src="../js/pages/profile.js"></script>
+</body>
+</html>

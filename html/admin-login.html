@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Login — KAYA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/shared/contract.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.0/dist/umd/supabase.min.js"></script>
+  <script src="../js/shared/supabase-config.js"></script>
+  <script src="../js/shared/auth.js"></script>
+  <script>KAYA.Auth.guard(null);</script>
+</head>
+<body class="auth-body" data-page="admin-login">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="KAYA home"><span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M8 20v-6.5M8 16.5l5-3.5M8 16.5l5 3.5"/><circle cx="17.5" cy="17.5" r="1.6" fill="#ff9f1c" stroke="none"/></svg></span>KAY<span>A</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
+      <nav class="nav" id="main-nav" aria-label="Main"></nav>
+    </div>
+  </header>
+
+  <main class="auth auth--admin" id="main">
+    <div class="auth__bg" id="auth-bg" aria-hidden="true"></div>
+    <div class="auth__overlay"></div>
+
+    <section class="auth__intro">
+      <span class="admin-badge"><svg class="icon icon--sm"><use href="#i-lock"/></svg> Restricted area</span>
+      <h1>KAYA Admin Console</h1>
+      <p>For authorized KAYA staff only. Access is limited to admin accounts, sessions expire after 30 minutes, and sign-in attempts are rate-limited.</p>
+    </section>
+
+    <section class="auth__panel">
+      <div class="auth-card">
+        <h2>Admin Login</h2>
+        <p class="sub">Customer or worker? <a href="login.html">Use the regular log in</a>.</p>
+        <p id="login-reason" class="notice" hidden></p>
+        <div id="admin-blocked" hidden></div>
+        <form id="admin-form" novalidate>
+          <div class="field">
+            <label for="ad-email">Admin email</label>
+            <input id="ad-email" data-field="email" type="email" autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label for="ad-password">Password</label>
+            <div class="pw-wrap"><input id="ad-password" data-field="password" type="password" autocomplete="current-password" required></div>
+          </div>
+          <button class="btn btn--primary btn--block btn--lg" type="submit" style="background:var(--navy)">Log In to Admin Console</button>
+          <p id="admin-message" class="notice" hidden></p>
+        </form>
+        <p class="auth-foot">Forgot your admin password? Contact the KAYA system owner.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/shared/icons.js"></script>
+  <script src="../js/shared/ui.js"></script>
+  <script src="../js/shared/scenes.js"></script>
+  <script src="../js/pages/auth-pages.js"></script>
+</body>
+</html>

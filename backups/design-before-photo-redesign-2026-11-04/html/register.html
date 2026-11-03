@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Customer Account — KAYA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/shared/contract.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.0/dist/umd/supabase.min.js"></script>
+  <script src="../js/shared/supabase-config.js"></script>
+  <script src="../js/shared/auth.js"></script>
+  <script>KAYA.Auth.guard(null);</script>
+</head>
+<body class="auth-body" data-page="register">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="KAYA home"><span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M8 20v-6.5M8 16.5l5-3.5M8 16.5l5 3.5"/><circle cx="17.5" cy="17.5" r="1.6" fill="#ff9f1c" stroke="none"/></svg></span>KAY<span>A</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
+      <nav class="nav" id="main-nav" aria-label="Main"></nav>
+    </div>
+  </header>
+
+  <main class="auth" id="main">
+    <div class="auth__bg" id="auth-bg" aria-hidden="true"></div>
+    <div class="auth__overlay"></div>
+
+    <section class="auth__intro">
+      <div class="eyebrow">Create your account</div>
+      <h1>Book trusted help in minutes.</h1>
+      <p>A free customer account lets you book verified workers, approve estimates before work starts, and request warranty service if a repair fails.</p>
+      <ul class="auth__perks">
+        <li><svg><use href="#i-file"/></svg>See the full estimate before any work begins</li>
+        <li><svg><use href="#i-receipt"/></svg>Payment references recorded for every booking</li>
+        <li><svg><use href="#i-alert"/></svg>Emergency tools during active bookings</li>
+      </ul>
+    </section>
+
+    <section class="auth__panel">
+      <div class="auth-card">
+        <h2>Create Customer Account</h2>
+        <p class="sub">Already have one? <a id="to-login" href="login.html">Log in</a></p>
+        <div id="register-blocked" hidden></div>
+        <form id="register-form" novalidate>
+          <div class="field">
+            <label for="rg-name">Full name</label>
+            <input id="rg-name" data-field="full_name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="rg-email">Email address</label>
+            <input id="rg-email" data-field="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="rg-phone">Mobile number</label>
+              <input id="rg-phone" data-field="phone" type="tel" placeholder="0917 123 4567" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="rg-city">City</label>
+              <select id="rg-city" data-field="city"></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="rg-password">Password</label>
+            <div class="pw-wrap"><input id="rg-password" data-field="password" type="password" autocomplete="new-password" required></div>
+            <div data-strength-for="rg-password"></div>
+          </div>
+          <div class="field">
+            <label for="rg-confirm">Confirm password</label>
+            <div class="pw-wrap"><input id="rg-confirm" data-field="confirm" type="password" autocomplete="new-password" required></div>
+          </div>
+          <div class="field">
+            <label class="checkbox"><input id="rg-terms" data-field="terms" type="checkbox"> I agree to the KAYA Terms and Privacy Policy</label>
+          </div>
+          <button class="btn btn--accent btn--block btn--lg" type="submit">Create Customer Account</button>
+          <p id="register-message" class="notice" hidden></p>
+        </form>
+        <div class="auth-divider">Offering a service instead?</div>
+        <a class="btn btn--ghost btn--block" href="worker-register.html">Register as a Worker</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/shared/icons.js"></script>
+  <script src="../js/shared/ui.js"></script>
+  <script src="../js/shared/scenes.js"></script>
+  <script src="../js/pages/auth-pages.js"></script>
+</body>
+</html>

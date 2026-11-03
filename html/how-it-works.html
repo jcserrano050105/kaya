@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works — KAYA</title>
+  <meta name="description" content="How KAYA works: describe your problem, get recommended services, choose a verified worker, approve the estimate, and track the service.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/shared/contract.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.0/dist/umd/supabase.min.js"></script>
+  <script src="../js/shared/supabase-config.js"></script>
+  <script src="../js/shared/auth.js"></script>
+  <script>KAYA.Auth.guard(null);</script>
+</head>
+<body class="page-public" data-page="how">
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="KAYA home"><span class="logo__mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M8 20v-6.5M8 16.5l5-3.5M8 16.5l5 3.5"/><circle cx="17.5" cy="17.5" r="1.6" fill="#ff9f1c" stroke="none"/></svg></span>KAY<span>A</span></a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span></span></button>
+      <nav class="nav" id="main-nav" aria-label="Main"></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="banner">
+      <div class="hero__bg" id="banner-bg" aria-hidden="true"></div>
+      <div class="hero__overlay"></div>
+      <div class="container">
+        <div class="banner__inner">
+          <div class="eyebrow">How It Works</div>
+          <h1>From “may sira” to fixed — in five steps</h1>
+          <p>KAYA keeps you in control at every stage: you know who’s coming, what it costs, and where the job stands.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <ol class="how-steps">
+          <li class="how-step reveal">
+            <span class="how-step__num">1</span>
+            <div class="how-step__text">
+              <h3>Describe your household problem</h3>
+              <p>Type it the way you’d say it to a neighbor — in English, Filipino or Taglish. Mention more than one problem if you have them.</p>
+            </div>
+            <div class="how-step__visual">
+              <div class="small muted" style="margin-bottom:6px">You type</div>
+              <div class="match-item"><span class="match-item__icon" style="background:#64748b"><svg><use href="#i-chat"/></svg></span><div><strong>“Tumutulo ang gripo at sira ang switch ng ilaw.”</strong></div></div>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <span class="how-step__num">2</span>
+            <div class="how-step__text">
+              <h3>Receive recommended services</h3>
+              <p>KAYA matches your words to the right service categories. Several problems? We’ll suggest an All-in-One worker so it’s one visit.</p>
+            </div>
+            <div class="how-step__visual">
+              <ul class="match-list" style="margin:0">
+                <li class="match-item"><span class="match-item__icon" style="background:#2554e8"><svg><use href="#i-plumbing"/></svg></span><div><strong>Plumbing – Faucet Repair</strong></div><span class="score">Match</span></li>
+                <li class="match-item"><span class="match-item__icon" style="background:#f59e0b"><svg><use href="#i-electrical"/></svg></span><div><strong>Electrical – Switch Replacement</strong></div><span class="score">Match</span></li>
+              </ul>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <span class="how-step__num">3</span>
+            <div class="how-step__text">
+              <h3>Choose a verified worker</h3>
+              <p>Compare Trust Profiles: verified identity, verified skills, years of experience, completed jobs, ratings and availability for your schedule.</p>
+            </div>
+            <div class="how-step__visual">
+              <span class="verified-badge"><svg><use href="#i-shield"/></svg>Identity Verified</span>
+              <div class="mini-stats" style="margin:4px 0 0"><div><strong>9 yrs</strong><small>Experience</small></div><div><strong>86</strong><small>Jobs</small></div><div><strong>4.8</strong><small>Rating</small></div></div>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <span class="how-step__num">4</span>
+            <div class="how-step__text">
+              <h3>Approve the estimate</h3>
+              <p>Your worker inspects the job and sends an itemized estimate — labor, materials and service fee. They cannot start until you approve it, and you can ask for a revision.</p>
+            </div>
+            <div class="how-step__visual">
+              <ul class="cost-lines">
+                <li><span>Labor</span><span>₱450.00</span></li>
+                <li><span>Materials</span><span>₱280.00</span></li>
+                <li><span>Service fee</span><span>₱50.00</span></li>
+                <li class="total"><span>Total</span><span>₱780.00</span></li>
+              </ul>
+            </div>
+          </li>
+          <li class="how-step reveal">
+            <span class="how-step__num">5</span>
+            <div class="how-step__text">
+              <h3>Track and complete the service</h3>
+              <p>Follow each status live — accepted, on the way, arrived, in progress, completed. Pay by Cash, GCash or QR, get a recorded reference, then rate your worker. Repairs include a 30-day warranty.</p>
+            </div>
+            <div class="how-step__visual">
+              <div class="mini-progress" style="max-width:none;margin:0 0 10px"><span class="is-on"></span><span class="is-on"></span><span class="is-on"></span><span class="is-now"></span><span></span><span></span></div>
+              <span class="badge badge--on_the_way">On the way · arriving in 12 min</span>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section--tint">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Privacy by design</div>
+          <h2>Why booking needs an account</h2>
+          <p>Browsing is open to everyone. Anything personal is private and protected by your login.</p>
+        </div>
+        <div class="steps">
+          <article class="step reveal"><div class="step__icon"><svg class="icon"><use href="#i-pin"/></svg></div><h3>Your address</h3><p>Shared only with the worker you book.</p></article>
+          <article class="step reveal"><div class="step__icon"><svg class="icon"><use href="#i-receipt"/></svg></div><h3>Estimates and payments</h3><p>Only you can approve, and only you see your records.</p></article>
+          <article class="step reveal"><div class="step__icon"><svg class="icon"><use href="#i-route"/></svg></div><h3>Live tracking</h3><p>Booking details stay between you, your worker and KAYA.</p></article>
+          <article class="step reveal"><div class="step__icon"><svg class="icon"><use href="#i-alert"/></svg></div><h3>Emergency tools</h3><p>Linked to your active booking and trusted contact.</p></article>
+        </div>
+        <div class="lock-banner reveal mt-lg">
+          <div class="lock-banner__icon"><svg><use href="#i-user-plus"/></svg></div>
+          <div>
+            <h2 style="margin:0 0 4px;font-size:1.3rem">Ready when you are</h2>
+            <p>Create a free customer account in under a minute — or register as a worker and start building your Digital Work Passport.</p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--accent" href="book.html">Book a Service</a>
+            <a class="btn btn--glass" href="worker-register.html">Become a Worker</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="margin-top:0;padding-top:0;border-top:0">
+        <span>© 2026 KAYA · Reliable Help. One Booking Away. · <a href="index.html#safety">Safety and Privacy</a> · <a href="#">Terms and Conditions</a> · <a href="worker-register.html">Become a Worker</a> · support@kaya.ph</span>
+        <span>Systems Integration and Architecture 2 prototype · Data is simulated in your browser.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/shared/icons.js"></script>
+  <script src="../js/shared/ui.js"></script>
+  <script src="../js/shared/scenes.js"></script>
+  <script>
+    KAYA.Scenes.carousel(KAYA.ui.$("#banner-bg"), ["plumbing", "laundry", "electrical", "gardening", "cleaning", "carpentry"], { interval: 5000 });
+    KAYA.ui.reveal();
+  </script>
+</body>
+</html>
