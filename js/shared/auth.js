@@ -513,10 +513,20 @@ KAYA.Auth = (function () {
         if (/confirm/i.test(r.error.message)) {
           return { ok: false, error: "Please confirm your email first. Check your inbox for the link from KAYA." };
         }
+        if (window.console) { console.warn("KAYA login failed:", r.error.code || r.error.status, r.error.message); }
+        if (r.error.code && r.error.code !== "invalid_credentials") {
+          return { ok: false, error: "Sign-in failed: " + r.error.message };
+        }
         return failLogin(key, opts.portal === "admin");
       }
       return fetchProfile(r.data.user.id).then(function (u) {
-        var portalOk = u && (opts.portal === "admin" ? u.role === "admin" : u.role !== "admin");
+        if (!u) {
+          if (window.console) { console.warn("KAYA login: password accepted but no profile row was found for", r.data.user.id); }
+          return SB.auth.signOut({ scope: "local" }).then(function () {
+            return { ok: false, error: "Your password is correct, but your KAYA profile couldn't be loaded. Please try again or contact support." };
+          });
+        }
+        var portalOk = opts.portal === "admin" ? u.role === "admin" : u.role !== "admin";
         if (!portalOk) { return SB.auth.signOut({ scope: "local" }).then(function () { return failLogin(key, opts.portal === "admin"); }); }
         if (u.status !== "ACTIVE") {
           return SB.auth.signOut({ scope: "local" }).then(function () {
@@ -652,7 +662,12 @@ KAYA.Auth = (function () {
   function sbSetNewPassword(pw) {
     var err = passwordError(pw);
     if (err) { return Promise.resolve({ ok: false, error: err }); }
-    return SB.auth.updateUser({ password: pw }).then(function (r) {
+    return SB.auth.getSession().then(function (s) {
+      if (!(s.data && s.data.session)) {
+        return { error: { message: "This reset link has expired or was already used. Request a new one from \"Forgot password\"." } };
+      }
+      return SB.auth.updateUser({ password: pw });
+    }).then(function (r) {
       if (r.error) { return { ok: false, error: r.error.message }; }
       var done = function () { clearCache(); api.endRecovery(); return { ok: true }; };
       return SB.auth.signOut({ scope: "global" }).then(done, done);

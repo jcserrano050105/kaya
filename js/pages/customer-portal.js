@@ -80,7 +80,10 @@
     return '<div class="list-row"><div><h3>' + bookingTitle(b) + "</h3>" +
       '<div class="small muted">' + ui.esc(b.booking_id) + " · " + ui.esc(ui.formatDate(b.schedule)) + (estimateLabel(b) ? " · " + ui.esc(estimateLabel(b)) : "") + "</div>" +
       miniProgress(b.status) + "</div>" +
-      '<div class="btn-row">' + ui.statusBadge(b.status) + ' <a class="btn btn--primary btn--small" href="booking.html?id=' + encodeURIComponent(b.booking_id) + '">Open live tracker</a></div></div>';
+      '<div class="btn-row">' + ui.statusBadge(b.status) + ' <a class="btn btn--primary btn--small" href="booking.html?id=' + encodeURIComponent(b.booking_id) + '">Open live tracker</a>' +
+      (KAYA.EMERGENCY_STATUSES.indexOf(b.status) !== -1
+        ? ' <a class="btn btn--danger btn--small" href="booking.html?id=' + encodeURIComponent(b.booking_id) + '#emergency">Emergency</a>' : "") +
+      "</div></div>";
   }
 
   function track() {

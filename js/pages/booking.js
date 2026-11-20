@@ -31,8 +31,13 @@
   function renderEmergency(b) {
     var panel = ui.$("#emergency");
     var active = KAYA.EMERGENCY_STATUSES.indexOf(b.status) !== -1;
+    var wasHidden = panel.hidden;
     panel.hidden = !active;
     if (!active) { return; }
+    /* Opened from an "Emergency" button: jump straight to the help panel. */
+    if (wasHidden && window.location.hash === "#emergency") {
+      setTimeout(function () { panel.scrollIntoView({ behavior: "smooth", block: "start" }); }, 0);
+    }
     var contact = KAYA.CustomerStore.trustedContact();
     var trustedBtn = ui.$("#em-trusted");
     if (contact.phone) {
