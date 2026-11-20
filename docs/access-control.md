@@ -8,7 +8,7 @@
 | `services.html` | Everyone | Categories, prices and descriptions come from the admin-managed catalog |
 | `how-it-works.html` | Everyone | The five-step process |
 | `book.html` | Everyone can open it | Guests see **Log In / Create Customer Account**. Only a signed-in customer gets the booking form, which is built in JavaScript after the role check (it is not in the HTML). Workers and admins see *Access denied*. |
-| `login.html` | Everyone | Customers and workers. Show/Hide password, Forgot Password, lockout |
+| `login.html` | Everyone | Customers and workers. Show/Hide password, Forgot Password (no lockout) |
 | `register.html` | Everyone | Creates a **Customer** account, then redirects to the booking form |
 | `worker-register.html` | Everyone | Creates a **Worker** account and submits the application together. The account shows **Pending Verification** until an admin approves it |
 | `admin-login.html` | Not linked in any navigation | Only admin accounts can sign in here; `noindex` |
@@ -45,7 +45,7 @@ The Worker Management API enforces the same rules again for data: customers only
 
 - Salted, iterated SHA-256 password hashes; passwords are never stored in plain text
 - Password strength indicator; minimum 8 characters with uppercase, lowercase and a number
-- Generic login errors (no hint whether an email exists); 5 failed attempts lock the email for 5 minutes
+- Generic login errors (no hint whether an email exists); 5 failed admin-portal attempts lock the email for 5 minutes (customer/worker logins have no lockout)
 - Forgot Password gives the same reply for any email (no account discovery)
 - Session tokens are random and must match the account; suspending or deactivating an account ends its sessions immediately
 - Customer/worker sessions: 8 hours, or 14 days with "Keep me logged in". Admin sessions: 30 minutes, never remembered

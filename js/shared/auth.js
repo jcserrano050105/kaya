@@ -273,7 +273,8 @@ KAYA.Auth = (function () {
     return null;
   }
 
-  function failLogin(key) {
+  function failLogin(key, admin) {
+    if (!admin) { return { ok: false, error: "Incorrect email or password." }; }
     var a = attempts();
     var rec = a[key];
     rec = rec && (!rec.lockedUntil || Date.now() >= rec.lockedUntil) ? rec : { count: 0 };
@@ -308,13 +309,13 @@ KAYA.Auth = (function () {
   function login(email, password, opts) {
     opts = opts || {};
     var key = (email || "").trim().toLowerCase();
-    var locked = lockedError(key);
+    var locked = opts.portal === "admin" ? lockedError(key) : null;
     if (locked) { return locked; }
     var db = load();
     var u = findUser(db, function (x) { return x.email === key; });
     var portalOk = u && (opts.portal === "admin" ? u.role === "admin" : u.role !== "admin");
     var good = u && portalOk && hashPassword(password || "", u.salt) === u.password_hash;
-    if (!good) { return failLogin(key); }
+    if (!good) { return failLogin(key, opts.portal === "admin"); }
     if (u.status !== "ACTIVE") {
       return { ok: false, error: "This account is " + u.status.toLowerCase() + ". Please contact KAYA support." };
     }
@@ -505,18 +506,18 @@ KAYA.Auth = (function () {
   function sbLogin(email, password, opts) {
     opts = opts || {};
     var key = (email || "").trim().toLowerCase();
-    var locked = lockedError(key);
+    var locked = opts.portal === "admin" ? lockedError(key) : null;
     if (locked) { return Promise.resolve(locked); }
     return SB.auth.signInWithPassword({ email: key, password: password || "" }).then(function (r) {
       if (r.error) {
         if (/confirm/i.test(r.error.message)) {
           return { ok: false, error: "Please confirm your email first. Check your inbox for the link from KAYA." };
         }
-        return failLogin(key);
+        return failLogin(key, opts.portal === "admin");
       }
       return fetchProfile(r.data.user.id).then(function (u) {
         var portalOk = u && (opts.portal === "admin" ? u.role === "admin" : u.role !== "admin");
-        if (!portalOk) { return SB.auth.signOut({ scope: "local" }).then(function () { return failLogin(key); }); }
+        if (!portalOk) { return SB.auth.signOut({ scope: "local" }).then(function () { return failLogin(key, opts.portal === "admin"); }); }
         if (u.status !== "ACTIVE") {
           return SB.auth.signOut({ scope: "local" }).then(function () {
             return { ok: false, error: "This account is " + u.status.toLowerCase() + ". Please contact KAYA support." };
