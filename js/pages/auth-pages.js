@@ -182,7 +182,7 @@
     REASONS["reset-done"] = ["Your password has been changed. Log in with your new password.", "success"];
     if (Auth.backend === "supabase") {
       Auth.onRecovery = showRecovery;
-      if (Auth.recovering && ui.param("reason") === "reset") { showRecovery(); }
+      if (Auth.recovering) { showRecovery(); }
     }
     ui.$("#to-register").href = withNext("register.html");
 

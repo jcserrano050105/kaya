@@ -654,7 +654,10 @@ KAYA.Auth = (function () {
     if (err) { return Promise.resolve({ ok: false, error: err }); }
     return SB.auth.updateUser({ password: pw }).then(function (r) {
       if (r.error) { return { ok: false, error: r.error.message }; }
-      return SB.auth.signOut({ scope: "global" }).then(function () { clearCache(); return { ok: true }; });
+      var done = function () { clearCache(); api.endRecovery(); return { ok: true }; };
+      return SB.auth.signOut({ scope: "global" }).then(done, done);
+    }).catch(function () {
+      return { ok: false, error: "Can't reach the KAYA server. Check your connection and try again." };
     });
   }
 
@@ -715,10 +718,22 @@ KAYA.Auth = (function () {
   }
 
   if (SB) {
-    api.recovering = /type=recovery/.test(window.location.hash) || /reason=reset/.test(window.location.search);
+    var RECOVERY_KEY = "kaya_password_recovery";
+    var setRecoveryFlag = function () { try { sessionStorage.setItem(RECOVERY_KEY, "1"); } catch (e) { /* storage blocked */ } };
+    var hasRecoveryFlag = function () { try { return sessionStorage.getItem(RECOVERY_KEY) === "1"; } catch (e) { return false; } };
+    api.recovering = /type=recovery/.test(window.location.hash) || /[?&]reason=reset(&|$)/.test(window.location.search) || hasRecoveryFlag();
+    if (api.recovering) { setRecoveryFlag(); }
+    api.endRecovery = function () {
+      api.recovering = false;
+      try { sessionStorage.removeItem(RECOVERY_KEY); } catch (e) { /* storage blocked */ }
+    };
+    if (/[?&]reason=reset-done(&|$)/.test(window.location.search)) { api.endRecovery(); }
     SB.auth.onAuthStateChange(function (event) {
       if (event === "PASSWORD_RECOVERY") {
         api.recovering = true;
+        setRecoveryFlag();
+        /* The reset link can land on another page (e.g. the Site URL): send the user to the form. */
+        if (pageName() !== "login.html") { window.location.replace("login.html?reason=reset"); return; }
         if (typeof api.onRecovery === "function") { api.onRecovery(); }
       }
     });
